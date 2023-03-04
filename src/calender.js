@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./calendar.css";
 
 // Days of week and months for displaying the data
-const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const weekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const months = [
   "January",
   "February",
@@ -50,6 +50,7 @@ const Calendar = ({ date }) => {
 
       newCurrentDays.push(calendarDay);
     }
+    console.log(newCurrentDays);
     setCurrentDays(newCurrentDays);
   }, [date]);
 
@@ -64,23 +65,24 @@ const Calendar = ({ date }) => {
       </div>
       <div className="calendar-body">
         <div className="table-header">
-          {weekdays.map((weekday) => {
+          {weekdays.map((weekday, i) => {
             return (
-              <div className="weekday">
+              <div className="weekday" key={i}>
                 <p>{weekday}</p>
               </div>
             );
           })}
         </div>
         <div className="table-content">
-          {currentDays.map((day) => {
+          {currentDays.map((day, i) => {
             return (
               <div
+                key={i}
                 className={
                   "calendar-day current" + (day.selected ? " selected" : "")
                 }
               >
-                <p>{day.number}</p>
+                <p>{day.currentMonth ? day.number : " "}</p>
               </div>
             );
           })}
